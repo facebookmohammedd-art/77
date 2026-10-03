@@ -47,8 +47,8 @@ h1,h2,h3,.serif{font-family:Amiri,serif}
 .sel{background:var(--bg);border:1px solid var(--line);border-radius:.9rem;padding:.7rem 1rem;width:100%;color:var(--ink);transition:border-color .3s}
 .sel:focus{border-color:var(--gold);outline:none}
 /* reveal */
-.rv{opacity:0;transform:translateY(40px) scale(.98);filter:blur(6px);transition:all 1s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
-.rv.in{opacity:1;transform:none;filter:none}
+.rv{opacity:0;transform:translateY(20px);transition:all .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
 /* tabs */
 .tabs{position:relative;display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.3rem}
 .tab{position:relative;z-index:1;padding:.55rem 1.2rem;border-radius:999px;font-weight:500;color:var(--mut);transition:color .4s}
@@ -57,37 +57,20 @@ h1,h2,h3,.serif{font-family:Amiri,serif}
 #grid{transition:opacity .35s,transform .35s}
 #grid.out{opacity:0;transform:translateY(18px)}
 /* card */
-.pc{perspective:900px;animation:up2 .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d)}
-.pi{position:relative;background:var(--card);border:1px solid var(--line);border-radius:1.25rem;overflow:hidden;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--s,1));transition:transform .25s ease-out,box-shadow .4s;box-shadow:0 10px 30px #0b1b3312}
-.pi:hover{--s:1.025;box-shadow:0 30px 60px #0b1b3340}
-.gl{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),#ffffff55,transparent 60%);mix-blend-mode:soft-light;z-index:3}
-.pi:hover .gl{opacity:1}
-.img{height:220px;overflow:hidden;background:#0b1b33;position:relative}
-.img img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
-.pi:hover .img img{transform:scale(1.12)}
-.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.2,.8,.2,1)}
-.pi:hover .more,.pi:focus-within .more{grid-template-rows:1fr}
-.more>div{overflow:hidden}
+.pc{perspective:900px;animation:up2 .8s cubic-bezier(.2,.8,.2,1) both}
+.pi{position:relative;background:var(--card);border:1px solid var(--line);border-radius:1.25rem;overflow:hidden;box-shadow:0 10px 30px #0b1b3312}
+.img{height:200px;overflow:hidden;background:#0b1b33;position:relative}
+.img img{width:100%;height:100%;object-fit:cover}
 .tag{position:absolute;z-index:4;top:1rem;inset-inline-start:1rem;background:var(--navy);color:var(--gold2);border-radius:999px;font-size:.8rem;padding:.25rem .8rem}
 /* why */
-.ic path,.ic circle,.ic rect,.ic line{stroke-dasharray:200;stroke-dashoffset:200;transition:stroke-dashoffset 1.8s ease .3s}
-.in .ic path,.in .ic circle,.in .ic rect,.in .ic line{stroke-dashoffset:0}
-.wc{background:var(--card);border:1px solid var(--line);border-radius:1.25rem;padding:2rem;transition:transform .5s,border-color .5s}
-.wc:hover{transform:translateY(-8px);border-color:var(--gold)}
-.ring{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:var(--navy);position:relative}
-.ring:before{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px dashed var(--gold);animation:spin 18s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
+.wc{background:var(--card);border:1px solid var(--line);border-radius:1.25rem;padding:1.5rem}
+.ring{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--navy);position:relative}
 footer{background:var(--navy);color:#C9D2E2}
 footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
-.at{background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:1.25rem;text-align:start;position:relative;overflow:hidden;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity 1s,filter 1s,border-color .4s,box-shadow .4s;transition-delay:var(--d,0s)}
-.at:after{content:"";position:absolute;inset-inline:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));transform:scaleX(0);transform-origin:right;transition:transform .5s}
-.at.in:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 18px 40px #0b1b3322}
-.at:hover:after{transform:scaleX(1)}
-/* Modal Animation */
-.modal-overlay{background:rgba(8, 17, 31, 0.75);backdrop-filter:blur(8px);transition:opacity .4s ease, visibility .4s ease;opacity:0;visibility:hidden}
+.at{background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:1rem;text-align:start;position:relative;overflow:hidden;box-shadow:0 4px 15px #0b1b330a;cursor:pointer;transition:border-color .3s}
+.at:hover{border-color:var(--gold)}
+.modal-overlay{background:rgba(8, 17, 31, 0.8);backdrop-filter:blur(6px);transition:opacity .3s ease, visibility .3s ease;opacity:0;visibility:hidden}
 .modal-overlay.active{opacity:1;visibility:visible}
-.modal-content{transform:translateY(30px) scale(0.95);transition:transform .4s cubic-bezier(.2,.8,.2,1), opacity .4s ease;opacity:0}
-.modal-overlay.active .modal-content{transform:translateY(0) scale(1);opacity:1}
 </style>
 </head>
 <body>
@@ -114,30 +97,26 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
   <svg id="sky" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
   <div class="max-w-6xl mx-auto px-5 w-full relative z-10">
     <p class="fade gold mb-4" style="--d:.2s">عقارات في بغداد (الكرخ والرصافة)</p>
-    <h1 class="text-5xl md:text-7xl font-bold leading-[1.25] max-w-3xl">
+    <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.25] max-w-3xl">
       <span class="mask"><span style="--d:.4s">بيتٌ يليق</span></span>
       <span class="mask"><span style="--d:.6s">بالطريقة التي تعيش بها</span></span>
     </h1>
-    <p class="fade mt-6 max-w-xl text-lg text-slate-300" style="--d:1s">عقارات في أحياء بغداد الكرخ والرصافة، مع مرافقة كاملة من أول زيارة حتى تسليم المفتاح.</p>
+    <p class="fade mt-6 max-w-xl text-base sm:text-lg text-slate-300" style="--d:1s">عقارات في أحياء بغداد الكرخ والرصافة، مع مرافقة كاملة من أول زيارة حتى تسليم المفتاح.</p>
 
-    <div class="fade sbox mt-10 p-3 max-w-3xl" style="--d:1.25s">
+    <div class="fade sbox mt-8 p-3 max-w-3xl" style="--d:1.25s">
       <div class="flex flex-col sm:flex-row gap-3">
-        <input id="q" class="flex-1 bg-transparent px-4 py-3 outline-none placeholder:text-slate-300 text-white" placeholder="ابحث بالحي أو اسم المشروع" aria-label="بحث">
-        <button id="ft" class="chip text-center text-white" aria-expanded="false" aria-controls="fp">الفلاتر</button>
-        <button id="go" class="btn">ابحث</button>
+        <input id="q" class="flex-1 bg-transparent px-4 py-3 outline-none placeholder:text-slate-300 text-white text-sm" placeholder="ابحث بالحي أو اسم المشروع" aria-label="بحث">
+        <button id="ft" class="chip text-center text-white text-sm" aria-expanded="false" aria-controls="fp">الفلاتر</button>
+        <button id="go" class="btn text-sm">ابحث</button>
       </div>
       <div id="fp" class="fp">
         <div>
           <div class="grid sm:grid-cols-2 gap-3 pt-4 px-1">
-            <label class="text-sm text-white">المنطقة <select id="farea" class="sel mt-1 text-slate-900"><option value="">كل المناطق</option></select></label>
+            <label class="text-sm text-white">المنطقة <select id="farea" class="sel mt-1 text-slate-900 text-sm"><option value="">كل المناطق</option></select></label>
             <label class="text-sm text-white">نوع العقار
-              <select id="ftype" class="sel mt-1 text-slate-900"><option value="">الكل</option><option>شقق</option><option>بيوت</option><option>فلل</option><option>شاليهات</option></select></label>
+              <select id="ftype" class="sel mt-1 text-slate-900 text-sm"><option value="">الكل</option><option>شقق</option><option>بيوت</option><option>فلل</option><option>شاليهات</option></select></label>
             <label class="text-sm text-white">الميزانية
-              <select id="fprice" class="sel mt-1 text-slate-900"><option value="0">أي سعر</option><option value="150000000">حتى 150 مليون د.ع</option><option value="300000000">حتى 300 مليون د.ع</option><option value="600000000">حتى 600 مليون د.ع</option><option value="1200000000">حتى 1.2 مليار د.ع</option></select></label>
-            <div class="text-sm text-white">المميزات
-              <div class="flex flex-wrap gap-2 mt-2">
-                <button class="chip text-white" aria-pressed="false">مسبح</button><button class="chip text-white" aria-pressed="false">إطلالة</button><button class="chip text-white" aria-pressed="false">موقف خاص</button>
-              </div></div>
+              <select id="fprice" class="sel mt-1 text-slate-900 text-sm"><option value="0">أي سعر</option><option value="150000000">حتى 150 مليون د.ع</option><option value="300000000">حتى 300 مليون د.ع</option><option value="600000000">حتى 600 مليون د.ع</option><option value="1200000000">حتى 1.2 مليار د.ع</option></select></label>
           </div>
         </div>
       </div>
@@ -145,25 +124,25 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
   </div>
 </section>
 
-<!-- نافذة عرض عقار جديد للزوار/الملاك (مع اختيار عدة صور وفيديوهات) -->
+<!-- نافذة عرض عقار جديد للزوار/الملاك -->
 <div id="userAddModal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4">
-  <div class="modal-content bg-[var(--card)] border border-[var(--line)] rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-8 shadow-2xl relative">
+  <div class="modal-content bg-[var(--card)] border border-[var(--line)] rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative">
     <button id="closeUserModal" class="absolute top-6 left-6 text-2xl text-[var(--mut)] hover:text-[var(--ink)] leading-none">&times;</button>
     <div class="text-center mb-6">
       <span class="gold text-sm font-bold uppercase tracking-wider">خدمة الملاك والوسطاء</span>
-      <h3 class="serif text-3xl font-bold mt-1">أضف عقارك معنا</h3>
-      <p class="text-sm text-[var(--mut)] mt-1">اختر عدة صور وفيديوهات لعقارك من الجهاز.</p>
+      <h3 class="serif text-2xl sm:text-3xl font-bold mt-1">أضف عقارك معنا</h3>
+      <p class="text-xs sm:text-sm text-[var(--mut)] mt-1">اختر صور وفيديوهات عقارك من الجهاز وسيتواصل معك فريقنا.</p>
     </div>
     
-    <div class="space-y-4">
+    <div class="space-y-3 sm:space-y-4">
       <div>
         <label class="block text-xs font-bold mb-1 text-[var(--mut)]">عنوان العقار أو وصفه المختصر</label>
-        <input type="text" id="UA_title" placeholder="مثلاً: بيت مستقل طابقين نظيف جداً" class="sel">
+        <input type="text" id="UA_title" placeholder="مثلاً: بيت مستقل طابقين" class="sel text-sm">
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-bold mb-1 text-[var(--mut)]">نوع العقار</label>
-          <select id="UA_type" class="sel">
+          <select id="UA_type" class="sel text-sm">
             <option value="بيوت">بيت</option>
             <option value="شقق">شقة</option>
             <option value="فلل">فيلا</option>
@@ -172,111 +151,118 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
         </div>
         <div>
           <label class="block text-xs font-bold mb-1 text-[var(--mut)]">المنطقة في بغداد</label>
-          <select id="UA_area" class="sel"></select>
+          <select id="UA_area" class="sel text-sm"></select>
         </div>
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-bold mb-1 text-[var(--mut)]">السعر المطلوب (د.ع)</label>
-          <input type="number" id="UA_price" placeholder="مثلاً: 200000000" class="sel">
+          <input type="number" id="UA_price" placeholder="مثلاً: 200000000" class="sel text-sm">
         </div>
         <div>
           <label class="block text-xs font-bold mb-1 text-[var(--mut)]">المساحة (م²)</label>
-          <input type="number" id="UA_size" placeholder="مثلاً: 200" class="sel">
+          <input type="number" id="UA_size" placeholder="مثلاً: 200" class="sel text-sm">
         </div>
       </div>
       <div>
-        <label class="block text-xs font-bold mb-1 text-[var(--mut)]">اختر عدة صور للعقار (يمكن تحديد أكثر من صورة)</label>
+        <label class="block text-xs font-bold mb-1 text-[var(--mut)]">صور العقار (من الهاتف/الحاسوب)</label>
         <input type="file" id="UA_imgFiles" accept="image/*" multiple class="sel text-xs py-2">
       </div>
       <div>
-        <label class="block text-xs font-bold mb-1 text-[var(--mut)]">اختر فيديوهات للعقار (اختياري)</label>
+        <label class="block text-xs font-bold mb-1 text-[var(--mut)]">فيديوهات العقار (اختياري)</label>
         <input type="file" id="UA_vidFiles" accept="video/*" multiple class="sel text-xs py-2">
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-bold mb-1 text-[var(--mut)]">اسمك الكريم</label>
-          <input type="text" id="UA_name" placeholder="اسم صاحب العقار" class="sel">
+          <input type="text" id="UA_name" placeholder="اسمك" class="sel text-sm">
         </div>
         <div>
           <label class="block text-xs font-bold mb-1 text-[var(--mut)]">رقم الهاتف</label>
-          <input type="tel" id="UA_phone" placeholder="07700000000" class="sel">
+          <input type="tel" id="UA_phone" placeholder="07700000000" class="sel text-sm">
         </div>
       </div>
-      <button id="submitUserProp" class="btn w-full mt-2 py-3 text-center shadow-lg">إرسال تفاصيل العقار عبر الواتساب 📲</button>
+      <button id="submitUserProp" class="btn w-full mt-2 py-3 text-center text-sm shadow-lg">إرسال تفاصيل العقار عبر الواتساب 📲</button>
     </div>
   </div>
 </div>
 
-<section id="areas" class="pt-24 px-5">
+<!-- قسم المناطق (تم ضمان ظهورها على الهواتف) -->
+<section id="areas" class="py-16 sm:py-24 px-5">
   <div class="max-w-6xl mx-auto">
-    <div class="rv text-center mb-12"><h2 class="text-4xl md:text-5xl font-bold">مناطق بغداد (الكرخ والرصافة)</h2>
-    <p class="mt-3" style="color:var(--mut)">اختر الحي لعرض العقارات المتاحة فيه، أو <button id="bannerAddBtn" class="gold underline bg-transparent border-none cursor-pointer font-bold">أضف عقارك الآن</button></p></div>
-    <div id="ag" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+    <div class="rv text-center mb-10">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold">مناطق بغداد (الكرخ والرصافة)</h2>
+      <p class="mt-3 text-sm sm:text-base" style="color:var(--mut)">اختر الحي لعرض العقارات المتاحة فيه، أو <button id="bannerAddBtn" class="gold underline bg-transparent border-none cursor-pointer font-bold">أضف عقارك الآن</button></p>
+    </div>
+    <div id="ag" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
   </div>
 </section>
 
-<section id="props" class="py-24 px-5">
+<!-- قسم العقارات المميزة -->
+<section id="props" class="py-16 sm:py-24 px-5 bg-[var(--card)]/50">
   <div class="max-w-6xl mx-auto">
-    <div class="rv flex flex-wrap items-end justify-between gap-6 mb-12">
-      <div><h2 class="text-4xl md:text-5xl font-bold">عقارات مميزة</h2>
-      <p class="mt-3 max-w-md" style="color:var(--mut)">اختر الفئة، ومرّر المؤشر فوق أي بطاقة لترى تفاصيلها.</p></div>
+    <div class="rv flex flex-wrap items-end justify-between gap-6 mb-10">
+      <div>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold">عقارات مميزة</h2>
+        <p class="mt-2 text-sm sm:text-base max-w-md" style="color:var(--mut)">اختر الفئة للاطلاع على المتاحة.</p>
+      </div>
       <div class="tabs" role="tablist" id="tabs">
         <span id="pill"></span>
-        <button class="tab" role="tab" aria-selected="true">شقق</button>
-        <button class="tab" role="tab" aria-selected="false">بيوت</button>
-        <button class="tab" role="tab" aria-selected="false">فلل</button>
-        <button class="tab" role="tab" aria-selected="false">شاليهات</button>
+        <button class="tab text-sm" role="tab" aria-selected="true">شقق</button>
+        <button class="tab text-sm" role="tab" aria-selected="false">بيوت</button>
+        <button class="tab text-sm" role="tab" aria-selected="false">فلل</button>
+        <button class="tab text-sm" role="tab" aria-selected="false">شاليهات</button>
       </div>
     </div>
-    <div id="grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-7"></div>
-    <p id="none" class="hidden text-center py-16" style="color:var(--mut)">لا توجد نتائج مطابقة. جرّب تخفيف الفلاتر.</p>
+    <div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <p id="none" class="hidden text-center py-16 text-sm" style="color:var(--mut)">لا توجد نتائج مطابقة. جرّب تخفيف الفلاتر.</p>
   </div>
 </section>
 
-<section id="why" class="py-24 px-5">
+<!-- لماذا نحن -->
+<section id="why" class="py-16 sm:py-24 px-5">
   <div class="max-w-6xl mx-auto">
-    <h2 class="rv text-4xl md:text-5xl font-bold text-center mb-14">لماذا نحن</h2>
-    <div class="grid md:grid-cols-3 gap-7">
-      <div class="rv wc" style="--d:.05s"><div class="ring mb-6"><svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E8CB7E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.500-1-8-4-8-9V6z"/><path d="M8.500 12l2.500 2.500 4.500-5"/></svg></div>
-        <h3 class="text-2xl font-bold mb-2">عقود موثّقة</h3><p style="color:var(--mut)">نراجع كل ملكية ووثيقة قبل العرض، فتشتري وأنت مطمئن.</p></div>
-      <div class="rv wc" style="--d:.2s"><div class="ring mb-6"><svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E8CB7E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-        <h3 class="text-2xl font-bold mb-2">معاينة بموعد يناسبك</h3><p style="color:var(--mut)">نرتّب لك المعاينة بسرعة، ونرافقك في الزيارة.</p></div>
-      <div class="rv wc" style="--d:.35s"><div class="ring mb-6"><svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E8CB7E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><rect x="6" y="11" width="12" height="9"/><line x1="12" y1="20" x2="12" y2="15"/></svg></div>
-        <h3 class="text-2xl font-bold mb-2">دعم بعد التسليم</h3><p style="color:var(--mut)">فريق الصيانة والإدارة يتابع معك بعد انتقالك.</p></div>
+    <h2 class="rv text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12">لماذا نحن</h2>
+    <div class="grid sm:grid-cols-3 gap-6">
+      <div class="rv wc"><div class="ring mb-4"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8CB7E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.500-1-8-4-8-9V6z"/><path d="M8.500 12l2.500 2.500 4.500-5"/></svg></div>
+        <h3 class="text-xl font-bold mb-2">عقود موثّقة</h3><p class="text-sm" style="color:var(--mut)">نراجع كل ملكية ووثيقة قبل العرض.</p></div>
+      <div class="rv wc"><div class="ring mb-4"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8CB7E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3 class="text-xl font-bold mb-2">معاينة بموعد يناسبك</h3><p class="text-sm" style="color:var(--mut)">نرتّب لك المعاينة بسرعة ونرافقك.</p></div>
+      <div class="rv wc"><div class="ring mb-4"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8CB7E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><rect x="6" y="11" width="12" height="9"/><line x1="12" y1="20" x2="12" y2="15"/></svg></div>
+        <h3 class="text-xl font-bold mb-2">دعم بعد التسليم</h3><p class="text-sm" style="color:var(--mut)">فريق الإدارة يتابع معك بعد انتقالك.</p></div>
     </div>
   </div>
 </section>
 
 <footer id="contact" class="pt-16 pb-8 px-5">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-10">
+  <div class="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8">
     <div class="md:col-span-2"><div class="serif text-3xl text-white mb-3">أبراج <span class="gold">الذهب</span></div>
-      <p class="max-w-sm">نربط الناس بالمنازل التي تناسبهم في بغداد، بشفافية ووضوح.</p></div>
-    <div><h3 class="text-white text-xl mb-3">روابط</h3><ul class="space-y-2"><li><a href="#areas">المناطق</a></li><li><a href="#props">العقارات</a></li><li><a href="#why">لماذا نحن</a></li><li><button id="footerAddBtn" class="bg-transparent border-none text-[inherit] cursor-pointer hover:text-white p-0">أضف عقارك</button></li></ul></div>
-    <div><h3 class="text-white text-xl mb-3">تواصل معنا</h3><button id="cstart" class="btn text-sm">ابدأ محادثة</button></div>
+      <p class="text-sm max-w-sm">نربط الناس بالمنازل التي تناسبهم في بغداد، بشفافية ووضوح.</p></div>
+    <div><h3 class="text-white text-lg mb-3">روابط</h3><ul class="space-y-2 text-sm"><li><a href="#areas">المناطق</a></li><li><a href="#props">العقارات</a></li><li><a href="#why">لماذا نحن</a></li><li><button id="footerAddBtn" class="bg-transparent border-none text-[inherit] cursor-pointer hover:text-white p-0">أضف عقارك</button></li></ul></div>
+    <div><h3 class="text-white text-lg mb-3">تواصل معنا</h3><button id="cstart" class="btn text-sm">ابدأ محادثة</button></div>
   </div>
-  <p class="max-w-6xl mx-auto mt-12 pt-6 border-t border-white/10 text-sm">© 2026 أبراج الذهب للعقارات. جميع الحقوق محفوظة.</p>
+  <p class="max-w-6xl mx-auto mt-12 pt-6 border-t border-white/10 text-xs sm:text-sm">© 2026 أبراج الذهب للعقارات. جميع الحقوق محفوظة.</p>
 </footer>
 
 <!-- نافذة لوحة التحكم الخاصة بك -->
 <div id="adminModal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4">
   <div class="modal-content bg-[var(--card)] border border-[var(--line)] rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 shadow-2xl relative">
     <div class="flex justify-between items-center pb-4 border-b border-[var(--line)] mb-4">
-      <h3 class="serif text-2xl font-bold">لوحة التحكم الخاصة (إدارة العقارات)</h3>
+      <h3 class="serif text-xl sm:text-2xl font-bold">لوحة التحكم الخاصة (إدارة العقارات)</h3>
       <button id="closeAdmin" class="text-2xl leading-none">&times;</button>
     </div>
     
     <div id="adminLoginSec" class="py-8 text-center space-y-4">
       <p class="text-sm text-[var(--mut)]">يرجى إدخال كلمة المرور للمتابعة:</p>
-      <input type="password" id="adminPass" placeholder="كلمة المرور" class="sel max-w-xs mx-auto text-center block mb-3">
+      <input type="password" id="adminPass" placeholder="كلمة المرور" class="sel max-w-xs mx-auto text-center block mb-3 text-sm">
       <button id="loginBtn" class="btn text-sm">دخول</button>
       <p id="loginErr" class="text-red-500 text-xs hidden mt-2">كلمة المرور غير صحيحة.</p>
     </div>
 
     <div id="adminPanelSec" class="hidden space-y-6">
       <div class="bg-[var(--bg)] p-4 rounded-xl border border-[var(--line)]">
-        <h4 class="font-bold text-lg mb-3">إضافة عقار جديد مع عدة صور وفيديوهات</h4>
-        <div class="grid sm:grid-cols-2 gap-3">
+        <h4 class="font-bold text-base sm:text-lg mb-3">إضافة عقار جديد مع صور وفيديوهات</h4>
+        <div class="grid sm:grid-cols-2 gap-3 text-sm">
           <input type="text" id="newTitle" placeholder="عنوان العقار" class="sel">
           <select id="newType" class="sel">
             <option value="شقق">شقق</option>
@@ -291,20 +277,20 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
         </div>
         <div class="grid sm:grid-cols-2 gap-3 mt-3">
           <div>
-            <label class="block text-xs font-bold mb-1 text-[var(--mut)]">صور متعددة للعقار</label>
+            <label class="block text-xs font-bold mb-1 text-[var(--mut)]">صور متعددة</label>
             <input type="file" id="newImgFiles" accept="image/*" multiple class="sel text-xs py-2">
           </div>
           <div>
-            <label class="block text-xs font-bold mb-1 text-[var(--mut)]">فيديوهات للعقار (اختياري)</label>
+            <label class="block text-xs font-bold mb-1 text-[var(--mut)]">فيديوهات</label>
             <input type="file" id="newVidFiles" accept="video/*" multiple class="sel text-xs py-2">
           </div>
         </div>
-        <input type="text" id="newFeatures" placeholder="المميزات بفواصل (مسبح, إطلالة, موقف خاص)" class="sel mt-3">
+        <input type="text" id="newFeatures" placeholder="المميزات بفواصل (مسبح, إطلالة)" class="sel mt-3 text-sm">
         <button id="addPropBtn" class="btn text-sm mt-4 w-full">حفظ ونشر العقار</button>
       </div>
 
       <div>
-        <h4 class="font-bold text-lg mb-3">العقارات الحالية (<span id="propCount">0</span>)</h4>
+        <h4 class="font-bold text-base sm:text-lg mb-3">العقارات الحالية (<span id="propCount">0</span>)</h4>
         <div id="adminPropList" class="space-y-2 max-h-60 overflow-y-auto"></div>
       </div>
     </div>
@@ -312,21 +298,21 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
 </div>
 
 <!-- الأزرار العائمة -->
-<div style="position:fixed; left:20px; bottom:20px; z-index:60; display:flex; flex-direction:column; gap:12px;">
-  <a href="https://wa.me/9647739314362?text=مرحباً، أريد الاستفسار عن الخدمات العقارية" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب" style="width:55px; height:55px; border-radius:50%; background:#25D366; display:grid; place-items:center; box-shadow:0 10px 25px rgba(37,211,102,0.4);">
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+<div style="position:fixed; left:16px; bottom:16px; z-index:60; display:flex; flex-direction:column; gap:10px;">
+  <a href="https://wa.me/9647739314362?text=مرحباً، أريد الاستفسار عن الخدمات العقارية" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب" style="width:50px; height:50px; border-radius:50%; background:#25D366; display:grid; place-items:center; box-shadow:0 8px 20px rgba(37,211,102,0.4);">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
   </a>
   <div id="cb">
-    <div id="cp" role="dialog" aria-label="المحادثة" aria-hidden="true" style="position:fixed; bottom:90px; left:20px; z-index:60; width:min(370px,calc(100vw - 2.5rem)); height:min(520px,70svh); display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line); border-radius:1.25rem; overflow:hidden; box-shadow:0 30px 80px #0006; transform-origin:100% 100%; opacity:0; visibility:hidden; transform:scale(.85) translateY(20px); transition:all .45s cubic-bezier(.2,.8,.2,1)">
-      <div class="chd" style="background:var(--navy); color:#fff; padding:1rem 1.25rem; display:flex; justify-content:space-between; align-items:center;">
-        <div><b class="serif text-xl">محادثة أبراج الذهب</b><div class="text-xs opacity-80">اكتب طلبك وسنرتّب لك التواصل</div></div>
+    <div id="cp" role="dialog" aria-label="المحادثة" aria-hidden="true" style="position:fixed; bottom:80px; left:16px; z-index:60; width:min(350px,calc(100vw - 2rem)); height:min(480px,65svh); display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line); border-radius:1.25rem; overflow:hidden; box-shadow:0 20px 60px #0006; transform-origin:100% 100%; opacity:0; visibility:hidden; transform:scale(.85) translateY(20px); transition:all .45s cubic-bezier(.2,.8,.2,1)">
+      <div class="chd" style="background:var(--navy); color:#fff; padding:.85rem 1rem; display:flex; justify-content:space-between; align-items:center;">
+        <div><b class="serif text-lg">محادثة أبراج الذهب</b><div class="text-[11px] opacity-80">اكتب طلبك وسنرتّب لك التواصل</div></div>
         <button id="cx" aria-label="إغلاق" class="text-2xl leading-none">&times;</button>
       </div>
-      <div id="cm" style="flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:.5rem;" aria-live="polite"></div>
-      <div id="cq" style="display:flex; flex-wrap:wrap; gap:.5rem; padding:0 1rem .6rem;"></div>
-      <div class="cin" style="display:flex; gap:.5rem; padding:.75rem; border-top:1px solid var(--line);"><input id="ci" aria-label="رسالتك" placeholder="اكتب رسالتك..." style="flex:1; min-width:0; background:transparent; outline:none; padding:0 .5rem;"><button id="cs" class="btn text-sm">إرسال</button></div>
+      <div id="cm" style="flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:.5rem; font-size:14px;" aria-live="polite"></div>
+      <div id="cq" style="display:flex; flex-wrap:wrap; gap:.4rem; padding:0 1rem .5rem;"></div>
+      <div class="cin" style="display:flex; gap:.5rem; padding:.6rem; border-top:1px solid var(--line);"><input id="ci" aria-label="رسالتك" placeholder="اكتب رسالتك..." style="flex:1; min-width:0; background:transparent; outline:none; padding:0 .5rem; font-size:14px;"><button id="cs" class="btn text-sm py-1 px-3">إرسال</button></div>
     </div>
-    <button id="cl" aria-label="فتح المحادثة" aria-expanded="false" style="width:55px; height:55px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(120deg,var(--gold),var(--gold2)); box-shadow:0 10px 25px rgba(201,162,75,0.4); border:none; cursor:pointer;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a1405" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.600 7.100L4 20l1-4.200A8 8 0 1 1 21 12z"/></svg></button>
+    <button id="cl" aria-label="فتح المحادثة" aria-expanded="false" style="width:50px; height:50px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(120deg,var(--gold),var(--gold2)); box-shadow:0 8px 20px rgba(201,162,75,0.4); border:none; cursor:pointer;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1405" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.600 7.100L4 20l1-4.200A8 8 0 1 1 21 12z"/></svg></button>
   </div>
 </div>
 
@@ -345,7 +331,8 @@ const AREAS = [
 let D = JSON.parse(localStorage.getItem('gold_towers_props')) || [
   {t:'بيوت', n:'بيت مستقل مودرن', l:'الفضيلية', p:220000000, a:250, r:4, f:['موقف خاص'], imgs:['https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80'], vids:[]},
   {t:'شقق', n:'شقة فاخرة بإطلالة', l:'الكرادة', p:160000000, a:170, r:3, f:['إطلالة'], imgs:['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80'], vids:[]},
-  {t:'فلل', n:'فيلا راقية مع حديقة', l:'المنصور', p:850000000, a:500, r:6, f:['مسبح', 'موقف خاص'], imgs:['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80'], vids:[]}
+  {t:'فلل', n:'فيلا راقية مع حديقة', l:'المنصور', p:850000000, a:500, r:6, f:['مسبح', 'موقف خاص'], imgs:['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80'], vids:[]},
+  {t:'شاليهات', n:'شاليه هادئ للاستجمام', l:'الجادرية', p:300000000, a:350, r:4, f:['مسبح'], imgs:['https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80'], vids:[]}
 ];
 
 function saveProps(){ localStorage.setItem('gold_towers_props', JSON.stringify(D)); }
@@ -362,7 +349,7 @@ function renderAreasSection(){
   const ag=$('#ag'); if(!ag) return;
   ag.innerHTML=AREAS.map((a,i)=>{
     const n=D.filter(d=>d.l===a).length;
-    return `<button class="at rv" style="--d:${(i%4)*.04}s" data-a="${a}"><b class="serif text-xl block">${a}</b><span class="text-sm" style="color:var(--mut)">${n?n+' عقار':'لا عقارات بعد'}</span></button>`
+    return `<button class="at rv" style="--d:${(i%4)*.03}s" data-a="${a}"><b class="serif text-base sm:text-lg block">${a}</b><span class="text-xs sm:text-sm" style="color:var(--mut)">${n?n+' عقار':'استفسر الآن'}</span></button>`
   }).join('');
 }
 renderAreasSection();
@@ -382,44 +369,35 @@ function draw(){
   grid.innerHTML=L.map((d,i)=>{
     const mainImg = (d.imgs && d.imgs.length > 0) ? d.imgs[0] : 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80';
     return `
-    <article class="pc" style="--d:${i*.1}s">
+    <article class="pc" style="--d:${i*.08}s">
       <div class="pi" tabindex="0">
         <span class="tag">${d.t}</span>
-        <div class="gl"></div>
         <div class="img">
           <img src="${mainImg}" alt="${d.n}">
         </div>
-        <div class="p-6">
-          <h3 class="text-2xl font-bold">${d.n}</h3>
-          <p class="mt-1 text-sm" style="color:var(--mut)">${d.l}</p>
+        <div class="p-5 sm:p-6">
+          <h3 class="text-xl sm:text-2xl font-bold">${d.n}</h3>
+          <p class="mt-1 text-xs sm:text-sm" style="color:var(--mut)">${d.l}</p>
           <div class="flex items-center justify-between mt-4">
-            <span class="text-xl font-bold gold">${fmt(d.p)}</span>
-            <span class="text-sm" style="color:var(--mut)">${d.a} م²</span>
+            <span class="text-lg sm:text-xl font-bold gold">${fmt(d.p)}</span>
+            <span class="text-xs sm:text-sm" style="color:var(--mut)">${d.a} م²</span>
           </div>
-          <div class="more">
-            <div>
-              <div class="flex flex-wrap gap-2 pt-4">
-                ${d.f.map(f=>`<span class="text-xs rounded-full px-3 py-1" style="border:1px solid var(--line)">${f}</span>`).join('')}
-              </div>
-              <div class="flex gap-2 mt-4">
-                <a href="#contact" class="btn text-sm flex-1 text-center">اطلب زيارة</a>
-                ${d.vids && d.vids.length > 0 ? `<span class="text-xs border border-[var(--gold)] text-[var(--gold)] px-3 py-2 rounded-full flex items-center justify-center">🎥 فيديوهات (${d.vids.length})</span>` : ''}
-              </div>
-            </div>
+          <div class="flex gap-2 mt-4 pt-4 border-t border-[var(--line)]">
+            <a href="#contact" class="btn text-xs sm:text-sm flex-1 text-center py-2">اطلب زيارة</a>
+            ${d.vids && d.vids.length > 0 ? `<span class="text-xs border border-[var(--gold)] text-[var(--gold)] px-3 py-2 rounded-full flex items-center justify-center">🎥 (${d.vids.length})</span>` : ''}
           </div>
         </div>
       </div>
     </article>`;
   }).join('');
-  $$('.pi',grid).forEach(el=>{el.onpointermove=e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;el.style.setProperty('--ry',((x-.5)*10)+'deg');el.style.setProperty('--rx',((.5-y)*10)+'deg');el.style.setProperty('--mx',x*100+'%');el.style.setProperty('--my',y*100+'%')};el.onpointerleave=()=>{el.style.setProperty('--rx','0deg');el.style.setProperty('--ry','0deg')}})}
+}
 
 function swap(){grid.classList.add('out');setTimeout(()=>{draw();grid.classList.remove('out')},350)}
 tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.setAttribute('aria-selected',x===b));tab=b.textContent;place();swap()});
 $('#go').onclick=()=>{const ty=$('#ftype').value;if(ty){const b=tabs.find(x=>x.textContent===ty);if(b){tabs.forEach(x=>x.setAttribute('aria-selected',x===b));tab=ty;place()}}swap();$('#props').scrollIntoView({behavior:'smooth'})};
-$('#q').onkeydown=e=>{if(e.key==='Enter')$('#go').click()};
-addEventListener('resize',place);document.fonts.ready.then(place);place();draw();
+$('#q').onkeydown=e=>{if(e.key==='Enter')$('#go').click()}; addEventListener('resize',place);document.fonts.ready.then(place);place();draw();  /* Intersection Observer للأجهزة المحمولة */ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1}); $$('.rv').forEach(el=>io.observe(el));
 
-/* نافذة إضافة عقار للملاك والزوار (دعم متعدد للصور والفيديو) */
+/* نافذة إضافة عقار */
 const WA_NUMBER='9647739314362'; 
 const userAddModal=$('#userAddModal');
 const openModal=()=>userAddModal.classList.add('active');
@@ -447,13 +425,13 @@ $('#submitUserProp').onclick=()=>{
     return;
   }
 
-  const msg = `طلب إضافة عقار جديد:\n\n*الاسم:* ${name}\n*الهاتف:* ${phone}\n*نوع العقار:* ${type}\n*المنطقة:* ${area}\n*العنوان:* ${title}\n*السعر:* ${price} د.ع\n*المساحة:* ${size} م²\n*عدد الصور المرفقة:* ${imgFiles.length}\n*عدد الفيديوهات المرفقة:* ${vidFiles.length}`;
+  const msg = `طلب إضافة عقار جديد:\n\n*الاسم:* ${name}\n*الهاتف:* ${phone}\n*نوع العقار:* ${type}\n*المنطقة:* ${area}\n*العنوان:* ${title}\n*السعر:* ${price} د.ع\n*المساحة:* ${size} م²\n*الصور المرفقة:* ${imgFiles.length}\n*الفيديوهات المرفقة:* ${vidFiles.length}`;
   
   window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg), '_blank');
   closeModal();
 };
 
-/* لوحة التحكم الخاصة بك */
+/* لوحة التحكم السرية */
 const adminModal = $('#adminModal'), adminBtn = $('#adminBtn'), closeAdmin = $('#closeAdmin');
 const adminLoginSec = $('#adminLoginSec'), adminPanelSec = $('#adminPanelSec'), adminPass = $('#adminPass'), loginBtn = $('#loginBtn'), loginErr = $('#loginErr');
 
@@ -550,7 +528,7 @@ $('#addPropBtn').onclick = () => {
       $('#newImgFiles').value = '';
       $('#newVidFiles').value = '';
       $('#newFeatures').value = '';
-      alert('تمت إضافة العقار بنجاح مع الصور والفيديوهات للموقع!');
+      alert('تمت إضافة العقار بنجاح!');
     });
   });
 };
