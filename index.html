@@ -145,14 +145,14 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
   </div>
 </section>
 
-<!-- نافذة عرض عقار جديد للزوار/الملاك مع دعم الصور والفيديو -->
+<!-- نافذة عرض عقار جديد للزوار/الملاك (مع رفع الصور من الجهاز) -->
 <div id="userAddModal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4">
   <div class="modal-content bg-[var(--card)] border border-[var(--line)] rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-8 shadow-2xl relative">
     <button id="closeUserModal" class="absolute top-6 left-6 text-2xl text-[var(--mut)] hover:text-[var(--ink)] leading-none">&times;</button>
     <div class="text-center mb-6">
       <span class="gold text-sm font-bold uppercase tracking-wider">خدمة الملاك والوسطاء</span>
       <h3 class="serif text-3xl font-bold mt-1">أضف عقارك معنا</h3>
-      <p class="text-sm text-[var(--mut)] mt-1">املأ التفاصيل أدناه مع روابط الصور والفيديو وسيتواصل معك فريقنا.</p>
+      <p class="text-sm text-[var(--mut)] mt-1">اختر صورة العقار من جهازك وملء التفاصيل.</p>
     </div>
     
     <div class="space-y-4">
@@ -185,15 +185,9 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
           <input type="number" id="UA_size" placeholder="مثلاً: 200" class="sel">
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="block text-xs font-bold mb-1 text-[var(--mut)]">رابط صورة العقار</label>
-          <input type="url" id="UA_img" placeholder="رابط صورة مباشر (URL)" class="sel">
-        </div>
-        <div>
-          <label class="block text-xs font-bold mb-1 text-[var(--mut)]">رابط فيديو (اختياري)</label>
-          <input type="url" id="UA_vid" placeholder="رابط فيديو ( يوتيوب )" class="sel">
-        </div>
+      <div>
+        <label class="block text-xs font-bold mb-1 text-[var(--mut)]">اختر صورة العقار من الجهاز</label>
+        <input type="file" id="UA_imgFile" accept="image/*" class="sel text-xs py-2">
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
@@ -260,7 +254,7 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
   <p class="max-w-6xl mx-auto mt-12 pt-6 border-t border-white/10 text-sm">© 2026 أبراج الذهب للعقارات. جميع الحقوق محفوظة.</p>
 </footer>
 
-<!-- نافذة لوحة التحكم الخاصة بك -->
+<!-- نافذة لوحة التحكم الخاصة بك (محمية بكلمة المرور) -->
 <div id="adminModal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4">
   <div class="modal-content bg-[var(--card)] border border-[var(--line)] rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 shadow-2xl relative">
     <div class="flex justify-between items-center pb-4 border-b border-[var(--line)] mb-4">
@@ -269,7 +263,7 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
     </div>
     
     <div id="adminLoginSec" class="py-8 text-center space-y-4">
-      <p class="text-sm text-[var(--mut)]">يرجى إدخال كلمة المرور (200220) للمتابعة:</p>
+      <p class="text-sm text-[var(--mut)]">يرجى إدخال كلمة المرور للمتابعة:</p>
       <input type="password" id="adminPass" placeholder="كلمة المرور" class="sel max-w-xs mx-auto text-center block mb-3">
       <button id="loginBtn" class="btn text-sm">دخول</button>
       <p id="loginErr" class="text-red-500 text-xs hidden mt-2">كلمة المرور غير صحيحة.</p>
@@ -277,7 +271,7 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
 
     <div id="adminPanelSec" class="hidden space-y-6">
       <div class="bg-[var(--bg)] p-4 rounded-xl border border-[var(--line)]">
-        <h4 class="font-bold text-lg mb-3">إضافة عقار جديد مع صورة وفيديو</h4>
+        <h4 class="font-bold text-lg mb-3">إضافة عقار جديد مع صورة من الجهاز</h4>
         <div class="grid sm:grid-cols-2 gap-3">
           <input type="text" id="newTitle" placeholder="عنوان العقار" class="sel">
           <select id="newType" class="sel">
@@ -290,8 +284,10 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
           <input type="number" id="newPrice" placeholder="السعر بالدينار" class="sel">
           <input type="number" id="newAreaSize" placeholder="المساحة م²" class="sel">
           <input type="number" id="newRooms" placeholder="عدد الغرف" class="sel">
-          <input type="url" id="newImg" placeholder="رابط صورة العقار (URL)" class="sel">
-          <input type="url" id="newVid" placeholder="رابط فيديو (اختياري)" class="sel">
+        </div>
+        <div class="mt-3">
+          <label class="block text-xs font-bold mb-1 text-[var(--mut)]">صورة العقار من الجهاز</label>
+          <input type="file" id="newImgFile" accept="image/*" class="sel text-xs py-2">
         </div>
         <input type="text" id="newFeatures" placeholder="المميزات بفواصل (مسبح, إطلالة, موقف خاص)" class="sel mt-3">
         <button id="addPropBtn" class="btn text-sm mt-4 w-full">حفظ ونشر العقار</button>
@@ -305,14 +301,11 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
   </div>
 </div>
 
-<!-- الأزرار العائمة (محادثة + واتساب مباشر) -->
+<!-- الأزرار العائمة -->
 <div style="position:fixed; left:20px; bottom:20px; z-index:60; display:flex; flex-direction:column; gap:12px;">
-  <!-- زر الواتساب المباشر -->
-  <a href="https://wa.me/9647739314362?text=مرحباً، أريد الاستفسار عن الخدمات العقارية" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب" style="width:55px; height:55px; border-radius:50%; background:#25D366; display:grid; place-items:center; box-shadow:0 10px 25px rgba(37,211,102,0.4); transition:transform .3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  <a href="https://wa.me/9647739314362?text=مرحباً، أريد الاستفسار عن الخدمات العقارية" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب" style="width:55px; height:55px; border-radius:50%; background:#25D366; display:grid; place-items:center; box-shadow:0 10px 25px rgba(37,211,102,0.4);">
     <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
   </a>
-
-  <!-- زر محادثة المساعد الذكي -->
   <div id="cb">
     <div id="cp" role="dialog" aria-label="المحادثة" aria-hidden="true" style="position:fixed; bottom:90px; left:20px; z-index:60; width:min(370px,calc(100vw - 2.5rem)); height:min(520px,70svh); display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line); border-radius:1.25rem; overflow:hidden; box-shadow:0 30px 80px #0006; transform-origin:100% 100%; opacity:0; visibility:hidden; transform:scale(.85) translateY(20px); transition:all .45s cubic-bezier(.2,.8,.2,1)">
       <div class="chd" style="background:var(--navy); color:#fff; padding:1rem 1.25rem; display:flex; justify-content:space-between; align-items:center;">
@@ -331,7 +324,6 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const nav=$('#nav');const sc=()=>nav.classList.toggle('on',scrollY>40);sc();addEventListener('scroll',sc,{passive:true});
 
-/* مناطق بغداد (الكرخ والرصافة) */
 const AREAS = [
   'الفضيلية', 'الكرادة', 'الجادرية', 'زيونة', 'الأعظمية', 'الكاظمية', 'الغدير', 
   'بغداد الجديدة', 'الشعب', 'الباب الشرقي', 'الكسرة', 'الوزيرية', 'الصليخ', 
@@ -341,9 +333,9 @@ const AREAS = [
 ];
 
 let D = JSON.parse(localStorage.getItem('gold_towers_props')) || [
-  {t:'بيوت', n:'بيت مستقل مودرن', l:'الفضيلية', p:220000000, a:250, r:4, f:['موقف خاص'], img:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80', vid:''},
-  {t:'شقق', n:'شقة فاخرة بإطلالة', l:'الكرادة', p:160000000, a:170, r:3, f:['إطلالة'], img:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80', vid:''},
-  {t:'فلل', n:'فيلا راقية مع حديقة', l:'المنصور', p:850000000, a:500, r:6, f:['مسبح', 'موقف خاص'], img:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80', vid:''}
+  {t:'بيوت', n:'بيت مستقل مودرن', l:'الفضيلية', p:220000000, a:250, r:4, f:['موقف خاص'], img:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80'},
+  {t:'شقق', n:'شقة فاخرة بإطلالة', l:'الكرادة', p:160000000, a:170, r:3, f:['إطلالة'], img:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80'},
+  {t:'فلل', n:'فيلا راقية مع حديقة', l:'المنصور', p:850000000, a:500, r:6, f:['مسبح', 'موقف خاص'], img:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80'}
 ];
 
 function saveProps(){ localStorage.setItem('gold_towers_props', JSON.stringify(D)); }
@@ -397,10 +389,7 @@ function draw(){
               <div class="flex flex-wrap gap-2 pt-4">
                 ${d.f.map(f=>`<span class="text-xs rounded-full px-3 py-1" style="border:1px solid var(--line)">${f}</span>`).join('')}
               </div>
-              <div class="flex gap-2 mt-4">
-                <a href="#contact" class="btn text-sm flex-1 text-center">اطلب زيارة</a>
-                ${d.vid ? `<a href="${d.vid}" target="_blank" class="text-xs border border-[var(--gold)] text-[var(--gold)] px-3 py-2 rounded-full flex items-center justify-center hover:bg-[var(--gold)] hover:text-black transition">🎥 فيديو</a>` : ''}
-              </div>
+              <a href="#contact" class="btn text-sm mt-4 block text-center">اطلب زيارة</a>
             </div>
           </div>
         </div>
@@ -414,7 +403,7 @@ $('#go').onclick=()=>{const ty=$('#ftype').value;if(ty){const b=tabs.find(x=>x.t
 $('#q').onkeydown=e=>{if(e.key==='Enter')$('#go').click()};
 addEventListener('resize',place);document.fonts.ready.then(place);place();draw();
 
-/* نافذة إضافة عقار للملاك والزوار (تدعم الصور والفيديو) */
+/* نافذة إضافة عقار للملاك والزوار (مع رفع الصور من الجهاز) */
 const WA_NUMBER='9647739314362'; 
 const userAddModal=$('#userAddModal');
 const openModal=()=>userAddModal.classList.add('active');
@@ -432,20 +421,30 @@ $('#submitUserProp').onclick=()=>{
   const area=$('#UA_area').value;
   const price=$('#UA_price').value;
   const size=$('#UA_size').value;
-  const img=$('#UA_img').value.trim();
-  const vid=$('#UA_vid').value.trim();
   const name=$('#UA_name').value.trim();
   const phone=$('#UA_phone').value.trim();
+  const fileInput=$('#UA_imgFile');
 
   if(!title || !price || !name || !phone){
     alert('يرجى تعبئة الحقول الأساسية (العنوان، السعر، الاسم، ورقم الهاتف).');
     return;
   }
 
-  const msg = `طلب إضافة عقار جديد مع وسائط:\n\n*الاسم:* ${name}\n*الهاتف:* ${phone}\n*نوع العقار:* ${type}\n*المنطقة:* ${area}\n*العنوان:* ${title}\n*السعر:* ${price} د.ع\n*المساحة:* ${size} م²\n*رابط الصورة:* ${img || 'لا يوجد'}\n*رابط الفيديو:* ${vid || 'لا يوجد'}`;
-  
-  window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg), '_blank');
-  closeModal();
+  const sendMsg = (imgName) => {
+    const msg = `طلب إضافة عقار جديد:\n\n*الاسم:* ${name}\n*الهاتف:* ${phone}\n*نوع العقار:* ${type}\n*المنطقة:* ${area}\n*العنوان:* ${title}\n*السعر:* ${price} د.ع\n*المساحة:* ${size} م²\n*الصورة المرفقة:* ${imgName}`;
+    window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg), '_blank');
+    closeModal();
+  };
+
+  if(fileInput.files && fileInput.files[0]){
+    const reader = new FileReader();
+    reader.onload = function(e){
+      sendMsg('تم إرفاق صورة من الجهاز');
+    };
+    reader.readAsDataURL(fileInput.files[0]);
+  } else {
+    sendMsg('بدون صورة');
+  }
 };
 
 /* لوحة التحكم الخاصة بك */
@@ -494,8 +493,7 @@ $('#addPropBtn').onclick = () => {
   const price = +$('#newPrice').value;
   const size = +$('#newAreaSize').value;
   const rooms = +$('#newRooms').value;
-  const img = $('#newImg').value.trim();
-  const vid = $('#newVid').value.trim();
+  const fileInput = $('#newImgFile');
   const features = $('#newFeatures').value.split(',').map(s=>s.trim()).filter(Boolean);
 
   if(!title || !price || !size){
@@ -503,37 +501,46 @@ $('#addPropBtn').onclick = () => {
     return;
   }
 
-  D.unshift({
-    t: type,
-    n: title,
-    l: area,
-    p: price,
-    a: size,
-    r: rooms || 3,
-    f: features.length ? features : ['إطلالة'],
-    img: img || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80',
-    vid: vid || ''
-  });
+  const proceedAdd = (imgUrl) => {
+    D.unshift({
+      t: type,
+      n: title,
+      l: area,
+      p: price,
+      a: size,
+      r: rooms || 3,
+      f: features.length ? features : ['إطلالة'],
+      img: imgUrl
+    });
+    saveProps();
+    updateAdminList();
+    renderAreasSection();
+    draw();
 
-  saveProps();
-  updateAdminList();
-  renderAreasSection();
-  draw();
+    $('#newTitle').value = '';
+    $('#newPrice').value = '';
+    $('#newAreaSize').value = '';
+    $('#newRooms').value = '';
+    $('#newImgFile').value = '';
+    $('#newFeatures').value = '';
+    alert('تمت إضافة العقار بنجاح للموقع!');
+  };
 
-  $('#newTitle').value = '';
-  $('#newPrice').value = '';
-  $('#newAreaSize').value = '';
-  $('#newRooms').value = '';
-  $('#newImg').value = '';
-  $('#newVid').value = '';
-  $('#newFeatures').value = '';
-  alert('تمت إضافة العقار بنجاح مع الصور والفيديو للموقع!');
+  if(fileInput.files && fileInput.files[0]){
+    const reader = new FileReader();
+    reader.onload = function(e){
+      proceedAdd(e.target.result);
+    };
+    reader.readAsDataURL(fileInput.files[0]);
+  } else {
+    proceedAdd('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80');
+  }
 };
 
 /* محادثة المساعد الذكي */
 const cp=$('#cp'),cm=$('#cm'),cq=$('#cq'),ci=$('#ci'),INT=['أبحث عن عقار','أريد عرض عقاري','التواصل مع الفريق'];
 let cd={},flow=[],fi=0,started=false,greeted=false;
-const Q={area:'أي منطقة في بغداد تفضّل؟',type:'ما نوع العقار؟',budget:'ما ميزانيتك التقريبية؟',name:'ما اسمك؟',phone:'رقم هاتفك للتواصل؟',details:'اكتب وصفًا مختصرًا للعقار مع روابط الصور والفيديو إن وجدت.',msg:'اكتب رسالتك.'};
+const Q={area:'أي منطقة في بغداد تفضّل؟',type:'ما نوع العقار؟',budget:'ما ميزانيتك التقريبية؟',name:'ما اسمك؟',phone:'رقم هاتفك للتواصل؟',details:'اكتب وصفًا مختصرًا للعقار.',msg:'اكتب رسالتك.'};
 const L={area:'المنطقة',type:'النوع',budget:'الميزانية',name:'الاسم',phone:'الهاتف',details:'تفاصيل العقار',msg:'الرسالة'};
 function add(t,w){const d=document.createElement('div');d.className='cmsg '+w;d.style.cssText='max-width:85%; padding:.6rem .9rem; border-radius:1rem; white-space:pre-line; '+(w==='b'?'background:var(--bg); align-self:flex-start':'background:linear-gradient(120deg,var(--gold),var(--gold2)); color:#1a1405; align-self:flex-end');d.textContent=t;cm.appendChild(d);cm.scrollTop=cm.scrollHeight}
 function chips(c=[]){cq.innerHTML='';c.forEach(x=>{const b=document.createElement('button');b.className='cchip';b.style.cssText='border:1px solid var(--gold); border-radius:999px; padding:.3rem .85rem; font-size:.85rem; cursor:pointer;';b.textContent=x;b.onclick=()=>say(x);cq.appendChild(b)})}
@@ -558,7 +565,7 @@ const s=flow[fi];if(s==='phone'&&!/^[\d\u0660-\u0669+\s]{9,15}$/.test(v)){bot('�
 cd[s]=v;fi++;next()}
 function tog(o){const op=cp.style.opacity==='1';cp.style.opacity=o?'1':'0';cp.style.visibility=o?'visible':'hidden';cp.style.transform=o?'none':'scale(.85) translateY(20px)';$('#cl').setAttribute('aria-expanded',o);if(o && !greeted){greeted=true;greet()}}
 $('#cl').onclick=()=>tog(cp.style.opacity!=='1');$('#cx').onclick=()=>tog(false);$('#cstart').onclick=()=>tog(true);
-$('#cs').onclick=()=>{say(ci.value);ci.value=''};ci.onkeydown=e=>{if(e.key==='Enter')$(say(ci.value),ci.value='')};
+$('#cs').onclick=()=>{say(ci.value);ci.value=''};ci.onkeydown=e=>{if(e.key==='Enter'){say(ci.value);ci.value=''}};
 </script>
 </body>
 </html>
