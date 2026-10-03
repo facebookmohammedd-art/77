@@ -131,7 +131,7 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
     <div class="text-center mb-6">
       <span class="gold text-sm font-bold uppercase tracking-wider">خدمة الملاك والوسطاء</span>
       <h3 class="serif text-2xl sm:text-3xl font-bold mt-1">أضف عقارك معنا</h3>
-      <p class="text-xs sm:text-sm text-[var(--mut)] mt-1">اختر صور عقارك من الجهاز مع رابط الفيديو.</p>
+      <p class="text-xs sm:text-sm text-[var(--mut)] mt-1">أدخل روابط الصور والفيديو وسيتواصل معك فريقنا.</p>
     </div>
     
     <div class="space-y-3 sm:space-y-4">
@@ -165,11 +165,11 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
         </div>
       </div>
       <div>
-        <label class="block text-xs font-bold mb-1 text-[var(--mut)]">صور العقار (من الهاتف/الحاسوب)</label>
-        <input type="file" id="UA_imgFiles" accept="image/*" multiple class="sel text-xs py-2">
+        <label class="block text-xs font-bold mb-1 text-[var(--mut)]">رابط صورة العقار (URL)</label>
+        <input type="url" id="UA_imgLink" placeholder="https://..." class="sel text-sm">
       </div>
       <div>
-        <label class="block text-xs font-bold mb-1 text-[var(--mut)]">رابط الفيديو (اختياري - يوتيوب)</label>
+        <label class="block text-xs font-bold mb-1 text-[var(--mut)]">رابط فيديو (اختياري - يوتيوب)</label>
         <input type="url" id="UA_vidLink" placeholder="https://youtube.com/..." class="sel text-sm">
       </div>
       <div class="grid grid-cols-2 gap-3">
@@ -261,7 +261,7 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
 
     <div id="adminPanelSec" class="hidden space-y-6">
       <div class="bg-[var(--bg)] p-4 rounded-xl border border-[var(--line)]">
-        <h4 class="font-bold text-base sm:text-lg mb-3">إضافة عقار جديد مع الصور والرابط</h4>
+        <h4 class="font-bold text-base sm:text-lg mb-3">إضافة عقار جديد سريع</h4>
         <div class="grid sm:grid-cols-2 gap-3 text-sm">
           <input type="text" id="newTitle" placeholder="عنوان العقار" class="sel">
           <select id="newType" class="sel">
@@ -277,16 +277,16 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
         </div>
         <div class="grid sm:grid-cols-2 gap-3 mt-3">
           <div>
-            <label class="block text-xs font-bold mb-1 text-[var(--mut)]">صور متعددة من الجهاز</label>
-            <input type="file" id="newImgFiles" accept="image/*" multiple class="sel text-xs py-2">
+            <label class="block text-xs font-bold mb-1 text-[var(--mut)]">رابط الصورة (URL)</label>
+            <input type="url" id="newImgLink" placeholder="https://..." class="sel text-sm">
           </div>
           <div>
-            <label class="block text-xs font-bold mb-1 text-[var(--mut)]">رابط الفيديو (اختياري)</label>
+            <label class="block text-xs font-bold mb-1 text-[var(--mut)]">رابط الفيديو (يوتيوب)</label>
             <input type="url" id="newVidLink" placeholder="https://youtube.com/..." class="sel text-sm">
           </div>
         </div>
         <input type="text" id="newFeatures" placeholder="المميزات بفواصل (مسبح, إطلالة)" class="sel mt-3 text-sm">
-        <button id="addPropBtn" class="btn text-sm mt-4 w-full">حفظ ونشر العقار</button>
+        <button id="addPropBtn" class="btn text-sm mt-4 w-full">حفظ ونشر العقار الفوري</button>
       </div>
 
       <div>
@@ -329,10 +329,10 @@ const AREAS = [
 ];
 
 let D = JSON.parse(localStorage.getItem('gold_towers_props')) || [
-  {t:'بيوت', n:'بيت مستقل مودرن', l:'الفضيلية', p:220000000, a:250, r:4, f:['موقف خاص'], imgs:['https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80'], vid:''},
-  {t:'شقق', n:'شقة فاخرة بإطلالة', l:'الكرادة', p:160000000, a:170, r:3, f:['إطلالة'], imgs:['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80'], vid:''},
-  {t:'فلل', n:'فيلا راقية مع حديقة', l:'المنصور', p:850000000, a:500, r:6, f:['مسبح', 'موقف خاص'], imgs:['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80'], vid:''},
-  {t:'شاليهات', n:'شاليه هادئ للاستجمام', l:'الجادرية', p:300000000, a:350, r:4, f:['مسبح'], imgs:['https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80'], vid:''}
+  {t:'بيوت', n:'بيت مستقل مودرن', l:'الفضيلية', p:220000000, a:250, r:4, f:['موقف خاص'], img:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80', vid:''},
+  {t:'شقق', n:'شقة فاخرة بإطلالة', l:'الكرادة', p:160000000, a:170, r:3, f:['إطلالة'], img:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80', vid:''},
+  {t:'فلل', n:'فيلا راقية مع حديقة', l:'المنصور', p:850000000, a:500, r:6, f:['مسبح', 'موقف خاص'], img:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80', vid:''},
+  {t:'شاليهات', n:'شاليه هادئ للاستجمام', l:'الجادرية', p:300000000, a:350, r:4, f:['مسبح'], img:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80', vid:''}
 ];
 
 function saveProps(){ localStorage.setItem('gold_towers_props', JSON.stringify(D)); }
@@ -367,7 +367,7 @@ function draw(){
   $('#none').textContent=D.some(d=>d.t===tab)?'لا توجد نتائج مطابقة. جرّب تخفيف الفلاتر.':'لا توجد عقارات منشورة في هذا التصنيف بعد.';
   $('#none').classList.toggle('hidden',!!L.length);
   grid.innerHTML=L.map((d,i)=>{
-    const mainImg = (d.imgs && d.imgs.length > 0) ? d.imgs[0] : 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80';
+    const mainImg = d.img || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80';
     return `
     <article class="pc" style="--d:${i*.08}s">
       <div class="pi" tabindex="0">
@@ -417,15 +417,15 @@ $('#submitUserProp').onclick=()=>{
   const size=$('#UA_size').value;
   const name=$('#UA_name').value.trim();
   const phone=$('#UA_phone').value.trim();
+  const img=$('#UA_imgLink').value.trim();
   const vid=$('#UA_vidLink').value.trim();
-  const imgFiles=$('#UA_imgFiles').files;
 
   if(!title || !price || !name || !phone){
     alert('يرجى تعبئة الحقول الأساسية (العنوان، السعر، الاسم، ورقم الهاتف).');
     return;
   }
 
-  const msg = `طلب إضافة عقار جديد:\n\n*الاسم:* ${name}\n*الهاتف:* ${phone}\n*نوع العقار:* ${type}\n*المنطقة:* ${area}\n*العنوان:* ${title}\n*السعر:* ${price} د.ع\n*المساحة:* ${size} م²\n*عدد الصور المرفقة:* ${imgFiles.length}\n*رابط الفيديو:* ${vid || 'لا يوجد'}`;
+  const msg = `طلب إضافة عقار جديد:\n\n*الاسم:* ${name}\n*الهاتف:* ${phone}\n*نوع العقار:* ${type}\n*المنطقة:* ${area}\n*العنوان:* ${title}\n*السعر:* ${price} د.ع\n*المساحة:* ${size} م²\n*رابط الصورة:* ${img || 'لا يوجد'}\n*رابط الفيديو:* ${vid || 'لا يوجد'}`;
   
   window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg), '_blank');
   closeModal();
@@ -477,7 +477,7 @@ $('#addPropBtn').onclick = () => {
   const price = +$('#newPrice').value;
   const size = +$('#newAreaSize').value;
   const rooms = +$('#newRooms').value;
-  const imgInput = $('#newImgFiles');
+  const img = $('#newImgLink').value.trim();
   const vid = $('#newVidLink').value.trim();
   const features = $('#newFeatures').value.split(',').map(s=>s.trim()).filter(Boolean);
 
@@ -486,47 +486,31 @@ $('#addPropBtn').onclick = () => {
     return;
   }
 
-  let imgsArr = [];
-  const processImages = (files, callback) => {
-    if(!files || files.length === 0){ callback(); return; }
-    let processed = 0;
-    [...files].forEach(file => {
-      const reader = new FileReader();
-      reader.onload = function(e){
-        imgsArr.push(e.target.result);
-        processed++;
-        if(processed === files.length) callback();
-      };
-      reader.readAsDataURL(file);
-    });
-  };
-
-  processImages(imgInput.files, () => {
-    D.unshift({
-      t: type,
-      n: title,
-      l: area,
-      p: price,
-      a: size,
-      r: rooms || 3,
-      f: features.length ? features : ['إطلالة'],
-      imgs: imgsArr.length > 0 ? imgsArr : ['https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80'],
-      vid: vid
-    });
-    saveProps();
-    updateAdminList();
-    renderAreasSection();
-    draw();
-
-    $('#newTitle').value = '';
-    $('#newPrice').value = '';
-    $('#newAreaSize').value = '';
-    $('#newRooms').value = '';
-    $('#newImgFiles').value = '';
-    $('#newVidLink').value = '';
-    $('#newFeatures').value = '';
-    alert('تمت إضافة العقار بنجاح!');
+  D.unshift({
+    t: type,
+    n: title,
+    l: area,
+    p: price,
+    a: size,
+    r: rooms || 3,
+    f: features.length ? features : ['إطلالة'],
+    img: img || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80',
+    vid: vid
   });
+
+  saveProps();
+  updateAdminList();
+  renderAreasSection();
+  draw();
+
+  $('#newTitle').value = '';
+  $('#newPrice').value = '';
+  $('#newAreaSize').value = '';
+  $('#newRooms').value = '';
+  $('#newImgLink').value = '';
+  $('#newVidLink').value = '';
+  $('#newFeatures').value = '';
+  alert('تمت إضافة العقار بنجاح وبشكل فوري!');
 };
 
 /* محادثة المساعد الذكي */
