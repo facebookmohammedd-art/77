@@ -131,7 +131,7 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
     <div class="text-center mb-6">
       <span class="gold text-sm font-bold uppercase tracking-wider">خدمة الملاك والوسطاء</span>
       <h3 class="serif text-2xl sm:text-3xl font-bold mt-1">أضف عقارك معنا</h3>
-      <p class="text-xs sm:text-sm text-[var(--mut)] mt-1">أدخل رابط صورة العقار وسيتواصل معك فريقنا.</p>
+      <p class="text-xs sm:text-sm text-[var(--mut)] mt-1">اختر صورة العقار من الجهاز وسيتواصل معك فريقنا.</p>
     </div>
     
     <div class="space-y-3 sm:space-y-4">
@@ -165,8 +165,8 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
         </div>
       </div>
       <div>
-        <label class="block text-xs font-bold mb-1 text-[var(--mut)]">رابط صورة العقار (URL)</label>
-        <input type="url" id="UA_imgLink" placeholder="https://..." class="sel text-sm">
+        <label class="block text-xs font-bold mb-1 text-[var(--mut)]">صورة العقار (اختر من الجهاز)</label>
+        <input type="file" id="UA_imgFile" accept="image/*" class="sel text-xs py-2">
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
@@ -257,7 +257,7 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
 
     <div id="adminPanelSec" class="hidden space-y-6">
       <div class="bg-[var(--bg)] p-4 rounded-xl border border-[var(--line)]">
-        <h4 class="font-bold text-base sm:text-lg mb-3">إضافة عقار جديد سريع</h4>
+        <h4 class="font-bold text-base sm:text-lg mb-3">إضافة عقار جديد مع صورة من الجهاز</h4>
         <div class="grid sm:grid-cols-2 gap-3 text-sm">
           <input type="text" id="newTitle" placeholder="عنوان العقار" class="sel">
           <select id="newType" class="sel">
@@ -272,8 +272,8 @@ footer a{transition:color .3s}footer a:hover{color:var(--gold2)}
           <input type="number" id="newRooms" placeholder="عدد الغرف" class="sel">
         </div>
         <div class="mt-3">
-          <label class="block text-xs font-bold mb-1 text-[var(--mut)]">رابط صورة العقار (URL)</label>
-          <input type="url" id="newImgLink" placeholder="https://..." class="sel text-sm">
+          <label class="block text-xs font-bold mb-1 text-[var(--mut)]">اختر صورة العقار من الجهاز</label>
+          <input type="file" id="newImgFile" accept="image/*" class="sel text-xs py-2">
         </div>
         <input type="text" id="newFeatures" placeholder="المميزات بفواصل (مسبح, إطلالة)" class="sel mt-3 text-sm">
         <button id="addPropBtn" class="btn text-sm mt-4 w-full">حفظ ونشر العقار الفوري</button>
@@ -386,6 +386,34 @@ tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.setAttribute('aria-selected',x=
 $('#go').onclick=()=>{const ty=$('#ftype').value;if(ty){const b=tabs.find(x=>x.textContent===ty);if(b){tabs.forEach(x=>x.setAttribute('aria-selected',x===b));tab=ty;place()}}swap();$('#props').scrollIntoView({behavior:'smooth'})};
 $('#q').onkeydown=e=>{if(e.key==='Enter')$('#go').click()}; addEventListener('resize',place);document.fonts.ready.then(place);place();draw();  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1}); $$('.rv').forEach(el=>io.observe(el));
 
+/* وظيفة ضغط وتصغير الصورة لكي لا تثقل الذاكرة */
+function compressImage(file, callback) {
+  if(!file){ callback(null); return; }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const MAX_WIDTH = 800;
+      const MAX_HEIGHT = 600;
+      let width = img.width;
+      let height = img.height;
+      if (width > height) {
+        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+      } else {
+        if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+      }
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      callback(canvas.toDataURL('image/jpeg', 0.7));
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
 /* نافذة إضافة عقار للزوار */
 const WA_NUMBER='9647739314362'; 
 const userAddModal=$('#userAddModal');
@@ -406,17 +434,24 @@ $('#submitUserProp').onclick=()=>{
   const size=$('#UA_size').value;
   const name=$('#UA_name').value.trim();
   const phone=$('#UA_phone').value.trim();
-  const img=$('#UA_imgLink').value.trim();
+  const imgFile=$('#UA_imgFile').files[0];
 
   if(!title || !price || !name || !phone){
     alert('يرجى تعبئة الحقول الأساسية (العنوان، السعر، الاسم، ورقم الهاتف).');
     return;
   }
 
-  const msg = `طلب إضافة عقار جديد:\n\n*الاسم:* ${name}\n*الهاتف:* ${phone}\n*نوع العقار:* ${type}\n*المنطقة:* ${area}\n*العنوان:* ${title}\n*السعر:* ${price} د.ع\n*المساحة:* ${size} م²\n*رابط الصورة:* ${img || 'لا يوجد'}`;
-  
-  window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg), '_blank');
-  closeModal();
+  const sendWhatsApp = (imgStatus) => {
+    const msg = `طلب إضافة عقار جديد:\n\n*الاسم:* ${name}\n*الهاتف:* ${phone}\n*نوع العقار:* ${type}\n*المنطقة:* ${area}\n*العنوان:* ${title}\n*السعر:* ${price} د.ع\n*المساحة:* ${size} م²\n*الصورة:* ${imgStatus}`;
+    window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg), '_blank');
+    closeModal();
+  };
+
+  if(imgFile){
+    compressImage(imgFile, () => sendWhatsApp('مرفقة مع الطلب'));
+  } else {
+    sendWhatsApp('بدون صورة');
+  }
 };
 
 /* لوحة التحكم السرية */
@@ -465,7 +500,7 @@ $('#addPropBtn').onclick = () => {
   const price = +$('#newPrice').value;
   const size = +$('#newAreaSize').value;
   const rooms = +$('#newRooms').value;
-  const img = $('#newImgLink').value.trim();
+  const imgFile = $('#newImgFile').files[0];
   const features = $('#newFeatures').value.split(',').map(s=>s.trim()).filter(Boolean);
 
   if(!title || !price || !size){
@@ -473,29 +508,39 @@ $('#addPropBtn').onclick = () => {
     return;
   }
 
-  D.unshift({
-    t: type,
-    n: title,
-    l: area,
-    p: price,
-    a: size,
-    r: rooms || 3,
-    f: features.length ? features : ['إطلالة'],
-    img: img || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80'
-  });
+  const finishAdd = (imgData) => {
+    D.unshift({
+      t: type,
+      n: title,
+      l: area,
+      p: price,
+      a: size,
+      r: rooms || 3,
+      f: features.length ? features : ['إطلالة'],
+      img: imgData || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80'
+    });
 
-  saveProps();
-  updateAdminList();
-  renderAreasSection();
-  draw();
+    saveProps();
+    updateAdminList();
+    renderAreasSection();
+    draw();
 
-  $('#newTitle').value = '';
-  $('#newPrice').value = '';
-  $('#newAreaSize').value = '';
-  $('#newRooms').value = '';
-  $('#newImgLink').value = '';
-  $('#newFeatures').value = '';
-  alert('تمت إضافة العقار بنجاح وبشكل فوري!');
+    $('#newTitle').value = '';
+    $('#newPrice').value = '';
+    $('#newAreaSize').value = '';
+    $('#newRooms').value = '';
+    $('#newImgFile').value = '';
+    $('#newFeatures').value = '';
+    alert('تمت إضافة العقار ونشره بنجاح!');
+  };
+
+  if(imgFile){
+    compressImage(imgFile, (compressedData) => {
+      finishAdd(compressedData);
+    });
+  } else {
+    finishAdd(null);
+  }
 };
 
 /* محادثة المساعد الذكي */
